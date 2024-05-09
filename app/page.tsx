@@ -135,7 +135,7 @@ export default function Chat() {
               <input
                 disabled={status !== "awaiting_message"}
                 value={input}
-                placeholder="What do you want to learn?"
+                placeholder="Enter subject or topic"
                 className="w-full h-full rounded-full px-4 bg-gray-200 dark:bg-gray-600"
                 onChange={handleInputChange}
               />
