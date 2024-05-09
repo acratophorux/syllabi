@@ -19,12 +19,16 @@ export default function Chat() {
   const { status, messages, input, submitMessage, handleInputChange } =
     useAssistant({ api: "/api/assistant" });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(contentRef?.current.textContent);
-      alert("Content copied to clipboard!");
+      {
+        await navigator.clipboard.writeText(
+          contentRef.current?.textContent || ""
+        );
+        alert("Content copied to clipboard!");
+      }
     } catch (err) {
       console.error("Failed to copy text: ", err);
     }
@@ -68,7 +72,7 @@ export default function Chat() {
             {messages.map((m: Message) => (
               <div
                 key={m.id}
-                className={`whitespace-pre-wrap flex flex-col   ${
+                className={`whitespace-pre-wrap flex flex-col w-full  ${
                   m.role === "user"
                     ? "rounded-lg shadow-lg items-start text-right pt-4 pl-4 bg-gray-200 dark:bg-gray-600"
                     : "gap-1"
